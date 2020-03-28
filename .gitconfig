@@ -1,0 +1,16 @@
+[user]
+    name=
+    password=
+    email=mdelaurell@mac.com
+[core]
+    repositoryformatversion = 0
+    filemode = true
+    bare = false
+    logallrefupdates = true
+    ignorecase = true
+    precomposeunicode = true
+[remote "origin"]
+
+[branch "master"]
+    remote = origin
+    merger = ref/heads/master
