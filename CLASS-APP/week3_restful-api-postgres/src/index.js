@@ -1,5 +1,5 @@
 const express = require('express');
-const logger = require('mike');
+//const logger = require('logger');
 const bodyParser = require('body-parser');
 
 const tasksRoutes = require('./routes/tasks.routes');
@@ -36,6 +36,6 @@ app.use(express.static('public'));
 app.use('/css',express.static(__dirname = '/public/css'));
 app.use('/js',express.static(__dirname = '/public/src'));
 
-app.listen(port, function(){
+app.listen(port, () => {
     console.log('Server started at http://localhost:%s', $port );
-})
+});
