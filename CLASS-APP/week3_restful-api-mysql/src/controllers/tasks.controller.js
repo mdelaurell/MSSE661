@@ -1,5 +1,5 @@
 const con = require('../db-config');
-const queries = requrie('../queries/tasks.queries');
+const queries = require('../queries/tasks.queries');
 
 exports.getAllTasks = function(req,res) {
     con.quiery(queries.ALL_TASKS, function(err, result, fields){

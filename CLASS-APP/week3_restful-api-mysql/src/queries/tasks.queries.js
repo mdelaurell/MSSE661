@@ -1,4 +1,4 @@
-exports.CREATE_TASKS_TABLE = 'CREATE TABLE FI NOT EXISTS tasks(id int NOT NULL AUTO_INCREMENT,name varchar(255) NOT NULL,created_date DATETIME DEFAULT CURRENT_TIMESTAMP(),status varchar(10) DEFAULT \'pending\',PRIMARY KEY (id))';
+exports.CREATE_TASKS_TABLE = 'CREATE TABLE IF NOT EXISTS tasks(id int NOT NULL AUTO_INCREMENT,name varchar(255) NOT NULL,created_date DATETIME DEFAULT CURRENT_TIMESTAMP(),status varchar(10) DEFAULT \'pending\',PRIMARY KEY (id))';
 
 exports.ALL_TASKS = 'SELECT * FROM tasks';
 

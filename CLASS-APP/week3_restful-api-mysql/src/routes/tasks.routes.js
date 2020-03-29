@@ -9,14 +9,14 @@ const tasksRoutes = express.Router();
 //  Routes for all Tasks
 //***************************************
 
-tasksRoutes.get('/', controllers.getAllTasks).post('/', controllers.createTask);
+tasksRoutes.get('/', controllers.getAllTasks).post('/', controllers.createTasks);
 
 // Routes for a task by id Evaluates to '/tasks/:tasksID/
 
 tasksRoutes
     .get('/:taskId', controllers.getAllTasks)
-    .put('/:taskId', controllers.updateTask)
-    .delete('/:taskId', controllers.deleteTask);
+    .put('/:taskId', controllers.updateTasks)
+    .delete('/:taskId', controllers.deleteTasks);
 
-moduel.exports = tasksRoutes;
+module.exports = tasksRoutes;
 
