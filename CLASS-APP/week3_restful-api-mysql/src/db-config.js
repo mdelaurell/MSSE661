@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-const queries = require('./queries/tasks.queries');
+const queries = require('./queries/travelers.queries');
 
 // Get the Host from Environment
 //const host = process.env.DB_HOST || 'localhost';
@@ -23,7 +23,7 @@ con.connect(function(err) {
     if (err) throw err;
     console.log('Connected!');
 
-    con.query(queries.CREATE_TASKS_TABLE, function(err, result) {
+    con.query(queries.CREATE_TRAVELERS_TABLE, function(err, result) {
         if (err) throw err;
         console.log('Table created or exists already!');
     });

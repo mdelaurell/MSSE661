@@ -2,7 +2,7 @@ const express = require('express');
 //const logger = require('logger');
 const bodyParser = require('body-parser');
 
-const tasksRoutes = require('./routes/tasks.routes');
+const travelersRoutes = require('./routes/travelers.routes');
 //const middleware = require('./middleware/errors.middleware');
 
 const app = express();
@@ -20,8 +20,8 @@ app.use(bodyParser.json());
 // Route-Handling Middleware Functions
 //********************************/
 
-// Handle routes for tasks.
-app.use('/tasks', tasksRoutes);
+// Handle routes for travelers.
+app.use('/travelers', travelersRoutes);
 //app.use('/users',usersRoutes);
 
 // Handle 404 request
