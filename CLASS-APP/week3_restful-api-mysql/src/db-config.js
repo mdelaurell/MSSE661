@@ -25,8 +25,13 @@ con.connect(function(err) {
 
     con.query(queries.CREATE_TRAVELERS_TABLE, function(err, result) {
         if (err) throw err;
-        console.log('Table created or exists already!');
+        console.log('Table Traveler created or exists already!');
     });
+    con.query(queries.CREATE_ADDRESS_TABLE, function(err, result) {
+        if (err) throw err;
+        console.log('Table Address created or exists already!');
+    });
+    
 });
 
 module.exports = con;
