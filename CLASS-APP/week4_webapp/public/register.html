@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset ="UTF-8 />
+        <meta name="viewport" content= "width=device=width, initial-scale=1, user-scalable=yes"/>
+        <link rel="stylesheet" href="./css/flexbox.css"/>
+        <title>Register </title>
+    </head>
+<body>
+<div class="container">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+    <form registration>
+    <label for="username">
+        <input type="text" placeholder="Enter Username" id="username" required>
+    </label>
+    <label for="password">
+        <input type="password" placeholder="Enter Password" id="password" required>
+    </label>
+    <label for="emailAddress">
+        <input type="text" placeholder="Enter Email Address" id="emailAddress" required>
+    </label>
+
+     <button onclick="doRegister(event)">Become Active</button>
+  </div>
+
+  <div class="container signin">
+    <p>Already have an account? <a href="index.html">Sign in</a>.</p>
+  </div>
+</form>
+</body>
+<script src="./src/app.js"></script>
+<script src="./src/auth.service.js"></script>
+<script src="./src/service-helpers.js"></script>
+</html>

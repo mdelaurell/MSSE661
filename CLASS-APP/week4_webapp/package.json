@@ -1,0 +1,15 @@
+{
+    "name": "week4",
+    "version": "1.0.4",
+    "description": "User our Api with the server",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon ./server"
+    },
+    "author": "Mike De Laurell",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.1",
+        "nodemon": "^2.0.2"
+    }
+}
