@@ -21,21 +21,16 @@ app.use(bodyParser.json());
 //*********************************/
 // Route-Handling Middleware Functions
 //********************************/
-
 // Partial API endpoints
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/traveler', travelersRoutes);
-
-// Handle routes for travelers.
-app.use('/travelers', travelersRoutes);
-//app.use('/users',usersRoutes);
+app.use('/api/travelers', travelersRoutes);
 
 // Handle 404 request
-app.use(middleware.error404);
+//app.use(middleware.error404);
 
 // Handle 500 requests.
-app.use(middleware.error500);
+//app.use(middleware.error500);
 
 
 app.use(express.static('public'));
