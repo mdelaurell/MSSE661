@@ -1,33 +1,51 @@
-const jwt = require('jsonwebtoken');
 
-const con = require('../db-config');
-const jwtconfig = require('../jwt-config');
-const queries = require('../queries/user.queries');
+const connect = require('../db-config');
+const query = require('../util/query');
 
-exports.getMe = function(req, res) {
-    const token = req.headers['auth-token'];
+const {
+    GET_ME_BY_USER_ID,
+    GET_ME_BY_USER_ID_WITH_PASSWORD,
+    UPDATE_USER,
+} = require('../queries/user.queries');
 
-    if (!token) {
-        //stop user auth validation
-        res.status(401).send({ auth: false, msg: 'No token provided.'});
-    }
+exports.getMe = async (req, res) => {
 
-    jwt.verify(token, jwtconfig.secret, function(err, decoded) {
-        if (err) {
-            res
-                .status(500)
-                .send({auth: false, msg: 'Fialed to authenticate token.'});
-        }
+    const decoded = req.user;
+    
+    if (decoded.id) {
+    
+        const con = await connect().catch((err) => {
 
-        con.query(queries.GET_ME_BY_USER_ID, [decoded.id], function(err, user) {
-            if (err) {
-                res.status(500).send({ msg: 'Could not find user.'});
-            }
-            
-            if (!user) {
-                res.status(400).send({ msg: 'No user found.'});
-            }
-        res.status(200).send(user);
+            throw err;
         });
+
+        csont user = await query(con, GET_ME_BY_USER_ID, [decoded.id]).catch(
+            (err) => {
+                res.status(500).json({ msg: 'User could not be found.'});
+            }
+        );
+
+        if (!user.lenght) {
+            res.status(400).json({ msg: 'No user.'});
+        }
+        res.status(200).send(user);
+    }
+};
+
+exports.updateMe = async (req, res) => {
+
+    const con = await connect().catch((err)=> {
+        throw err;
     });
+
+    const user = await query(con, GET_ME_BY_USER_ID_WITH_PASSWORD,[req.user.id,]).catch((err) => {
+        res.status(500).json({ msg: 'User could not be found.'});
+        }
+    );
+
+    if (!user.lenght) {
+        res.status(400).json({ msg: 'No user.'});
+    }
+    res.status(200).send(user);
+    }
 };
