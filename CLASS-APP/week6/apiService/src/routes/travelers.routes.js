@@ -1,14 +1,5 @@
+const controllers = require('../controllers/travelers.controller');
 const express = require('express');
-
-const {
-    getAllTravelers,
-    createTraveler,
-    getTraveler,
-    updateTraveler,
-    deleteTraveler,
-} = require('../controllers/travelers.controller');
-
-const canAccess = require('../middleware/auth.middleware');
 
 const travelersRoutes = express.Router();
 
@@ -18,14 +9,14 @@ const travelersRoutes = express.Router();
 //  Routes for all Travelers
 //***************************************
 
-travelersRoutes.get('/', canAcess, getAllTravelers).post('/', canAccess, createTraveler);
+travelersRoutes.get('/', controllers.getAllTravelers).post('/', controllers.createTravelers);
 
 // Routes for a task by id Evaluates to '/travelers/:travelersID/
 
 travelersRoutes
-    .get('/:taskId', canAccess, getTravelers)
-    .put('/:taskId', canAccess, updateTravelers)
-    .delete('/:taskId', canAccess, deleteTravelers);
+    .get('/:taskId', controllers.getAllTravelers)
+    .put('/:taskId', controllers.updateTravelers)
+    .delete('/:taskId', controllers.deleteTravelers);
 
 module.exports = travelersRoutes;
 

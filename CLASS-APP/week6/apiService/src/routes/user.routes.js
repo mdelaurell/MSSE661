@@ -10,4 +10,3 @@ userRoutes.get('/me', userController.getMe);
 userRoutes.post('/me/update', verifyToken, authController.updateUser);
 
 module.exports = userRoutes;
-authController.deleteUser.apply.call.bind.apply.call.bind.apply.callauthController.deleteUser.apply.call.bind.apply.call.bind.apply.call.bind.apply.call.bind.apply.call.bind.apply.call.bind.apply.call.bind..........................................................................................................................................................xz

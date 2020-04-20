@@ -1,135 +1,117 @@
-
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const connect = require('../db-config');
 
-const {
-    GET_ME_BY_USERNAME,
-    GET_ME_BY_USERNAME_WITH_PASSWORD,
-    INSERT_NEW_USER,
-} = require('../queries/user.queries');
-const query = require('../utils/query');
-
-const{
-    refreshTokens,
-    generateAccessToken,
-    generateRefreshToken,
-} = require('../utils/jwt-helpers');
+const con = require('../db-config');
+const jwtconfig = require('../jwt-config');
+const authQueries = require('../queries/auth.queries');
+const userQueries = require('../queries/user.queries'); 
 
 
 //register user
-exports.registerUser = async (req, res) => {
+exports.registerUser = function(req, res) {
     const passwordHash = bcrypt.hashSync(req.body.password);
     const params = [req.body.username,  passwordHash, req.body.emailAddress, req.body.activeUser]
 
-    const con = await connect().catch((err) => {
-        throw err;
-    });
+    con.query(authQueries.INSERT_NEW_USER, params ,
+        function(err, result) {
+            if (err) {
+                //stop registeration
+                console.log(err);
+                res.status(500).send({ msg: 'Could not register user. Please try again later.'});
+            }
 
-    //check for exsiting user
-    const user = await query(con, GET_ME_BY_USERNAME, [beq.body.username]).catch(
-        (err) => {
-            res.status(500);
-            res.send({ msg: 'Could not retrieve user.'});
+            con.query(userQueries.GET_ME_BY_USERNAME, [req.body.username], function(err, user) {
+                if (err) {
+                    console.log(err);
+                    res.status(500);
+                    res.send({ msg: 'Could not retrieve user'});
+                }
+                console.log(user);
+                res.send(user);
+            });
         }
     );
-
-    if (user.lgength == 1) {
-        res.status(403).send({msg: 'User already exists, you cannot create this user.'});
-    } else {
-        const result = await query(con, INSERT_NEW_USER, params).catch((err) => {
-            res.status(500).send({msg: 'Could not register user.  Please try again later.'});
-        });
-
-        res.send({ msg: 'User created.'});
-    }
 };
 
-exports.login = async (req, res) => {
-    // establish a connection
-    const con = await connection().catch((err) => {
-      throw err;
-    });
-  
-    // check for existing user first
-    const user = await query(con, GET_ME_BY_USERNAME_WITH_PASSWORD, [
-      req.body.username,
-    ]).catch((err) => {
-      res.status(500);
-      res.send({ msg: 'Could not retrieve user.' });
-    });
-  
-    // if the user exists
-    if (user.length === 1) {
-      //   validate entered password from database saved password
-      const validPass = await bcrypt
-        .compare(req.body.password, user[0].password)
-        .catch((err) => {
-          res.json(500).json({ msg: 'Invalid password!' });
-        });
-  
-      if (!validPass) {
-        res.status(400).send({ msg: 'Invalid password!' });
-      }
-      // create token
-      const accessToken = generateAccessToken(user[0].user_id, {
+//perform login
+exports.login = function(req, res) {
+    //check user exits
+    con.query(userQueries.GET_ME_BY_USERNAME_WITH_PASSWORD, [req.body.username],
+        function(err,user) {
+            if (err) {
+                res.statue(500);
+                res.send({ msg: 'Could not tretrieve user.'});
+            }
+            console.log(user);
+            // validate entered password from database saved password
+            bcrypt.compare(req.body.password, user[0].password).then(function(validPass) {
+                    if (!validPass) {
+                        res.status(400).send({msg: 'Invalid Password.'});
+                    }
+                    // create token
+                    const token = jwt.sign({ id: user[0].user_id}, jwtconfig.secret);
+                    res
+                        .header('auth-token', token)
+                        .send({ auth: true, msg: "Logged in."});
+                    })
+                .catch(console.log);
+            }
+        );
+    };
     
-        expiresIn: 7200,
-      });
-      const refreshToken = generateRefreshToken(user[0].user_id, {
-        expiresIn: 7200,
-      });
-  
-      refreshTokens.push(refreshToken);
-  
-      res
-        .header('access_token', accessToken) 
-        .send({
-          auth: true,
-          msg: 'Logged in!',
-          token_type: 'bearer',
-          access_token: accessToken,
-          expires_in: 86400,
-          refresh_token: refreshToken,
-        });
-    }
-  };
-  
-  exports.token = (req, res) => {
-    const refreshToken = req.body.token;
-  
+//perform update
+exports.updateUser = function(req, res) {
+        //check user exits
+        con.query(userQueries.GET_ME_BY_USER_ID_WITH_PASSWORD,
+            [req.user.id], 
+            function(err, user) {
+                console.log(err, user);
+                if (err) {
+                    res.status(500);
+                    res.send({ msg: 'Could not retrieve user.' });
+                }   
     
-    if (!refreshToken) {
-      res
-        .status(401)
-        .send({ auth: false, msg: 'Access Denied. No token provided.' });
-    }
-  
-    if (!refreshTokens.includes(refreshToken)) {
-      res.status(403).send({ msg: 'Invalid Refresh Token' });
-    }
-  
-    const verified = verifyToken(refreshToken, jwtconfig.refresh, req, res);
-  
-    if (verified) {
-      const accessToken = generateToken(user[0].user_id, { expiresIn: 86400 });
-      res
-        .header('access_token', accessToken) 
-        .send({
-          auth: true,
-          msg: 'Logged in!',
-          token_type: 'bearer',
-          access_token: accessToken,
-          expires_in: 20,
-          refresh_token: refreshToken,
-        });
-    }
-    res.status(403).send({ msg: 'Invalid Token' });
-  };
-  
-  exports.logout = (req, res) => {
-    const refreshToken = req.body.token;
-    refreshTokens = refreshTokens.filter((t) => t !== refreshToken);
-  
-    res.send({ msg: 'Logout successful' });
-  };
-  
+            console.log(user);
+    
+            const passwordHash = bcrypt.hashSync(req.body.password);
+    
+            //perform update
+            con.query(
+                authQueries.updateUser, 
+                [req.body.username, req.body.email, passwordHash, "true", user[0].id], 
+                function(err,result) {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send({ msg: 'Could not update user settings.' });
+                    }
+                    res.json({ msg: 'Updated successfully!'});
+                }
+            );
+        }
+    );
+};
+    
+    
+//perform delete - sets the user to active false
+exports.deleteUser = function(req, res) {
+    //chek user exits
+    con.query(userQueries.GET_ME_BY_USER_ID_WITH_PASSWORD,
+        [req.uer.id],
+        function(err, user) {
+            console.log(err, user);
+            if (err) {
+                res.status(500);
+                res.send({ msg: 'Could not retrieve user.' });
+                }
+                
+                con.query(authQueries.updateUser, ["false", user[0].id], 
+                    function(err,result) {
+                        if (err) {
+                            console.log(err);
+                            res.status(500).send({ msg: 'Could not update user settings.' });
+                        }
+                        res.json({ msg: 'Deleted successfully!'});
+                });
+        }
+    );
+};

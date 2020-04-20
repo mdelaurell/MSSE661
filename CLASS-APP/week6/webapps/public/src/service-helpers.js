@@ -36,7 +36,7 @@ const _get = async(url, options = DEFAULT_OPTIONS_WITH_AUTH) => {
 
 /**
  * 
- * @param {string} url 
+ * @param {string} url  - our address to our server
  * @param {any} data 
  * @param {any} options 
  */

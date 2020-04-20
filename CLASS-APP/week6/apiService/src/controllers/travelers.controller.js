@@ -1,89 +1,50 @@
-const mysql = requrie('mysql');
-const connnect = require('../db-config');
-const {
-    ALL_TRAVELERS,
-    SINGLE_TRAVELERS,
-    INSERT_TRAVELER,
-    UPDATE_TRAVELERS,
-    DELETE_TRAVELERS
-} = require('../queries/travler.queries');
+const con = require('../db-config');
+const queries = require('../queries/travelers.queries');
 
-const query = require('../utils/query');
-const { serverError } = require('../utils/handlers');
-
-
-exports.getAllTravelers = async (req,res) => {
-    
-    const con = await connnect().catch((err) => {
-        throw err;
+exports.getAllTravelers = function(req,res) {
+    con.quiery(queries.ALL_TRAVELERS, function(err, result, fields){
+        if (err) {
+            res.send(err);
+        }
+        res.json(result);
     });
-
-    const travelers = await MediaQueryList(con, ALL_TRAVELERS(req.user.id)).catch(
-        serverError(res)
-    );
-
-    if (!travelers.length) {
-        res.status(400).json({ msg: 'No travelers available for this user'});
-    }
-    req.json(travelers);
 };
 
-exports.getTravelers = async(req,res) => {
-    const con = await connect().catch((err) => {
-        throw err;
+exports.getTravelers = function(req,res) {
+    con.quiery(queries.SINGLE_TRAVELERS, [req.params.taskID], function(err, data){
+        if (err) {
+            res.send(err);
+        }
+        res.json(data);
     });
-        
-    const travelers = await query(con, SINGLE_TRAVELERS(req.user.id, req.params.travlersId)).catch(serverError(res));
-
-    if(!travelers.length) {
-        res.status(400).json({ msg: 'No travelers available for this user.'});
-    }
-    res.json(travelers);
 };
 
-exports.createTravelers = async (req,res) => {
-    const con = await connect().catch ((err) => {
-        
-        throw err;
+exports.createTravelers = function(req,res) {
+    con.quiery(queries.INSERT_TASK, [req.params.taskID], function(err, result){
+        if (err) {
+            res.send(err);
+        }
+        console.log(result);
+        res.json({message:  'Number of records inserted: ' + result.affectedRows});
     });
-
-    const travelers = await query(con, INSERT_TRAVELER(req.user.id, req.params.travlersId)).catch(
-        serverError(res)
-    );
-
-    if (!travelers.length) {
-        res.status(400).json({ msg: 'No travelers availble for user'});
-    }
-    res.json(travelers);
 };
 
-exports.updateTravelers = async(req,res) => {
-    const con = await connect().catch((err) => {
-        throw err;
+exports.updateTravelers = function(req,res) {
+    con.quiery(queries.UPDATE_TRAVELERS, 
+        [req.body.name, req.body.status, req.params.taskID],
+        function(err, result, fields){
+        if (err) {
+            res.send(err);
+        }
+        res.json(result);
     });
-
-    const travelers = await query(con, UPDATE_TRAVELERS(req.user.id, req.params.travlersId)).catch(
-        serverError(res)
-    );
-    
-    if (!travelers.length) {
-        res.status(400).json({ msg: 'No travelers availble for user'});
-    }
-    res.json(travelers);
 };
 
-exports.deleteTravelers = async (req,res) => {
-    
-    const con = await connect().catch((err) => {
-        throw err;
+exports.deleteTravelers = function(req,res) {
+    con.quiery(queries.DELETE_TRAVELERS, [req.params.taskID],function(err, result, ){
+        if (err) {
+            res.send(err);
+        }
+        res.json({message: 'Deleted successfully. ID =' + req.params.taskID});
     });
-
-    const travelers = await query(con, DELETE_TRAVELERS(req.user.id, req.params.travlersId)).catch(
-        serverError(res)
-    );
-    
-    if (!travelers.length) {
-        res.status(400).json({ msg: 'No travelers availble for user'});
-    }
-    res.json(travelers);
 };
