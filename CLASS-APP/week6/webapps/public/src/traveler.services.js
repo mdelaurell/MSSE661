@@ -6,4 +6,4 @@ const addtraveler = (formData) =>
     _post(TRAVELER_API, formData, DEFAULT_OPTIONS_WITH_AUTH);
 
 const deletetraveler = (travelerID) =>
-    _delete(`${TRAVELER_API}/${travelerID}`, OPTIONS_WITH_AUTH);
+    _delete(`${TRAVELER_API}/${travelers_ID}`, OPTIONS_WITH_AUTH);

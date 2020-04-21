@@ -63,9 +63,17 @@ class travelerList {
       deleteBtn.addEventListener('click', this._deleteEventHandler(traveler.traveler_id));
       deleteBtn.appendChild(deleteBtnTxt);
   
-      const travelerNameSpan = document.createElement('span');
-      const travelerName = document.createTextNode(traveler.traveler_name);
+      const travelerFirstNameSpan = document.createElement('span');
+      const travelerFirstName = document.createTextNode(traveler.traveler_first_name);
       travelerNameSpan.appendChild(travelerName);
+    
+      const travelerLastNameSpan = document.createElement('span');
+      const travelerLastName = document.createTextNode(traveler.traveler_last_name);
+      travelerLastNameSpan.appendChild(travelerLastName);
+  
+      const travelerEmailSpan = document.createElement('span');
+      const travelerEmailAddress = document.createTextNode(traveler.traveler_email_address);
+      travelerEmailSpan.appendChild(travelerEmailAddress);
   
       const travelerStatusSpan = document.createElement('span');
       const travelerStatus = document.createTextNode(traveler.status);

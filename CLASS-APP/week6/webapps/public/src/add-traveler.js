@@ -17,15 +17,19 @@ const doAddTraveler = async (e) => {
     const status = options[selectedIndex].text;
   
     if (!travelers_first_name) {
-      alert('Please enter a traveler name.');
+      alert('Please enter a traveler first name.');
       return;
     }
     if (!travelers_last_name) {
-      alert('Please enter a traveler name.');
+      alert('Please enter a traveler last name.');
       return;
     }
     if (!traveler_email_address) {
-      alert('Please enter a traveler name.');
+      alert('Please enter a traveler email address.');
+      return;
+    }
+    if (selectedIndex == 0) {
+      alert('Please select the traveler\'s status.');
       return;
     }
   
