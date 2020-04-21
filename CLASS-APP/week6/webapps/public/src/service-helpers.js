@@ -35,18 +35,22 @@ const _get = async(url, options = DEFAULT_OPTIONS_WITH_AUTH) => {
 };
 
 /**
- * 
- * @param {string} url  - our address to our server
- * @param {any} data 
- * @param {any} options 
+ * Generic Create API handler.
+ *
+ * @param {string} url - address to make request to
+ * @param {any} data - updates to send
+ * @param {any} options - additional options to send. Defaults to options with normal headers
  */
-const _post = async(url, data, options = DEFAULT_OPTIONS) => {
+const _post = async (url, data, options = DEFAULT_OPTIONS) => {
     const res = await fetch(url, {
-        method: 'POST',
-        ... options,
+      method: 'POST',
+      ...options,
+      body: JSON.stringify(data),
     });
+  
     return res.json();
-};
+  };
+
 /**
  * 
  * @param {string} url 

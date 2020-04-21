@@ -30,10 +30,6 @@ con.connect(function(err) {
         if (err) throw err;
         console.log('Table Traveler created or exists already!');
     });
-    con.query(travelersQueries.CREATE_ADDRESS_TABLE, function(err, result) {
-        if (err) throw err;
-        console.log('Table Address created or exists already!');
-    });
 
     con.query(authQueries.CREATE_USERS_TABLE, function(err, result){
         if (err) throw err;

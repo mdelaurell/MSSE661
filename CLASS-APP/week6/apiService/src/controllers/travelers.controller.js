@@ -11,7 +11,7 @@ exports.getAllTravelers = function(req,res) {
 };
 
 exports.getTravelers = function(req,res) {
-    con.quiery(queries.SINGLE_TRAVELERS, [req.params.taskID], function(err, data){
+    con.quiery(queries.SINGLE_TRAVELERS, [req.params.travelerID], function(err, data){
         if (err) {
             res.send(err);
         }
@@ -20,7 +20,7 @@ exports.getTravelers = function(req,res) {
 };
 
 exports.createTravelers = function(req,res) {
-    con.quiery(queries.INSERT_TASK, [req.params.taskID], function(err, result){
+    con.quiery(queries.INSERT_traveler, [req.params.travelerID], function(err, result){
         if (err) {
             res.send(err);
         }
@@ -31,7 +31,7 @@ exports.createTravelers = function(req,res) {
 
 exports.updateTravelers = function(req,res) {
     con.quiery(queries.UPDATE_TRAVELERS, 
-        [req.body.name, req.body.status, req.params.taskID],
+        [req.body.name, req.body.status, req.params.travelerID],
         function(err, result, fields){
         if (err) {
             res.send(err);
@@ -41,10 +41,10 @@ exports.updateTravelers = function(req,res) {
 };
 
 exports.deleteTravelers = function(req,res) {
-    con.quiery(queries.DELETE_TRAVELERS, [req.params.taskID],function(err, result, ){
+    con.quiery(queries.DELETE_TRAVELERS, [req.params.travelerID],function(err, result, ){
         if (err) {
             res.send(err);
         }
-        res.json({message: 'Deleted successfully. ID =' + req.params.taskID});
+        res.json({message: 'Deleted successfully. ID =' + req.params.travelerID});
     });
 };

@@ -13,42 +13,38 @@
         <title>Week6</title>
     </head>
     <body>
-      <div class="wrapper"></div>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./about.html">About</a></li>
-                </ul>
-            </nav>
-        </header>
-        <div class="content">
-            <div class="center"></div>
-                <form novalidate>
-                    <label for="username">
-                        <span>Username:</span>
-                        <input id="username" type="text" placholder="username" />    
-                    </label>
-                    <label for="password">
-                        <span>Password:</span>
-                        <input id="password" type="password" placeholder="Password" />
-                    </label>
-                    <button onclick="doLogin(event)">Login</button>
-                    <a href="./register.html" align='center'>Register</a>
-                </form>
+        <nav class="navbar sticky-top navbar-expand-md navbar-light bg-info">
+            <a class="navbar-brand" href="#">Class App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <div>
+                      <a id="login" class="dropdown-item" href="./login.html">Login</a>
+                      <a id="logout" class="dropdown-item" href="./login.html">Logout</a>
+                    </div>
+                    <a class="dropdown-item" href="./register.html">Register</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+              </ul>
             </div>
-        </div>
-      <footer>
-            <nav>
-                <ul>
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./about.html">About</a></li>
-                    <li>Author:<a href="mailto:mdelaurell@mac.com">Mike</a></li>
-                </ul>
-            </nav>
-        </footer>
-    </div>
-
+          </nav>  
+        
 
         <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

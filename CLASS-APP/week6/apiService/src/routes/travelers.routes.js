@@ -11,12 +11,12 @@ const travelersRoutes = express.Router();
 
 travelersRoutes.get('/', controllers.getAllTravelers).post('/', controllers.createTravelers);
 
-// Routes for a task by id Evaluates to '/travelers/:travelersID/
+// Routes for a traveler by id Evaluates to '/travelers/:travelersID/
 
 travelersRoutes
-    .get('/:taskId', controllers.getAllTravelers)
-    .put('/:taskId', controllers.updateTravelers)
-    .delete('/:taskId', controllers.deleteTravelers);
+    .get('/:travelerId', controllers.getAllTravelers)
+    .put('/:travelerId', controllers.updateTravelers)
+    .delete('/:travelerId', controllers.deleteTravelers);
 
 module.exports = travelersRoutes;
 
