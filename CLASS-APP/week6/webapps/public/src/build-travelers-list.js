@@ -113,8 +113,8 @@ class travelerList {
       return div;
     };
   
-    generatetravelers = async () => {
-      const res = await gettravelers();
+    generateTravelers = async () => {
+      const res = await getTravelers();
       const div = document.getElementById('travelers');
       const loadingDiv = div.childNodes[1];
   
@@ -132,8 +132,7 @@ class travelerList {
   
   const inst = new travelerList();
   
-  // This is an IIFE (Immediately Invoked Function Expression).
   (async () => {
-    inst.generatetravelers();
+    inst.generateTravelers();
   })();
   

@@ -40,7 +40,7 @@ exports.login = function(req, res) {
         function(err,user) {
             if (err) {
                 res.statue(500);
-                res.send({ msg: 'Could not tretrieve user.'});
+                res.send({ msg: 'Could not retrieve user.'});
             }
             console.log(user);
             // validate entered password from database saved password

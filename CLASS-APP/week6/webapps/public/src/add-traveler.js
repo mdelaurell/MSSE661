@@ -1,13 +1,10 @@
-/**
- * AJAX add new traveler to traveler list on save.
- */
 const doAddTraveler = async (e) => {
     e.preventDefault();
   
-    const travelerFirstName = document.getElementById('formInputFirstName');
-    const travelerLastName = document.getElementById('formInputLastName');
-    const travelerEmailAddress = document.getElementById('formInputEmailAddress');
-    const statusSelect = document.getElementById('formSelectStatus');
+    const travelerFirstName = document.getElementById('HomeInputFirstName');
+    const travelerLastName = document.getElementById('HomeInputLastName');
+    const travelerEmailAddress = document.getElementById('HomeInputEmailAddress');
+    const statusSelect = document.getElementById('HomeSelectStatus');
     
     const travelers_first_name = travelerFirstName.value;
     const travelers_last_name = travelerLastName.value;
@@ -33,10 +30,10 @@ const doAddTraveler = async (e) => {
       return;
     }
   
-    const res = await addtraveler({ travelers_first_name,travelers_last_name,traveler_email_address, status });
+    const res = await addTraveler({ travelers_first_name,travelers_last_name,traveler_email_address, status });
   
     if (res !== null) {
-      inst.generatetravelers();
+      inst.generateTravelers();
     }
     travelerInput.value = '';
   };

@@ -1,9 +1,9 @@
 const doLogin = async (e) => {
     e.preventDefault();
-    const username = document.getElementById('formInputUsername').value;
-    const password = document.getElementById('formInputPassword').value;
+    const username = document.getElementById('LoginInputUsername').value;
+    const password = document.getElementById('LoginInputPassword').value;
   
-    const res = await login({ username, password, emailAddress, activeUser }).catch((err) => {
+    const res = await login({ username, password}).catch((err) => {
       alert('Failed to login. Please try again later.');
     });
   
