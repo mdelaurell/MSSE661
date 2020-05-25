@@ -11,8 +11,8 @@ exports.ALL_TRAVELERS = 'SELECT * FROM travelers';
 
 exports.SINGLE_TRAVELERS = 'SELECT * FROM travelers where travelers_id = ?';
 
-exports.CREATE_TRAVELERS = 'INSERT INTO travelers (name) VALUES (?)';
+exports.CREATE_TRAVELERS = 'INSERT INTO travelers (firstName, lastName, emailAddress, status) VALUES (?, ?, ?, ?)';
 
-exports.UPDATE_TRAVELERS = 'UPDATE travelers set name = ?, status = ? WHERE travelers_id = ?';
+exports.UPDATE_TRAVELERS = 'UPDATE travelers set firstName = ?, lastName = ?, emailAddress = ?, status = ? WHERE travelers_id = ?';
 
-exports.DELETE_TRAVELERS = 'DELETE FROM travelers where travelers_id = ?';
+exports.DELETE_TRAVELERS = 'UPDATE travelers set status = ? where travelers_id = ?';

@@ -1,0 +1,153 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+body {
+    /*background-image: url("../images/airport.jpg");
+    background-repeat: no-repeat;*/
+    background-color: lightslategray;
+}
+.wrapper{
+    display: flex;
+    width:100%;
+}
+
+.bg_image {
+    background-image: url("../images/airport.jpg");
+    background-repeat: no-repeat;
+    height: 500px;
+    width: 1200px;
+    margin-right: auto;
+    margin-left: auto;
+    position:
+}
+
+.loginContainer {
+    float: right;
+    padding: 20px;
+}
+/* Style the form - display items horizontally */
+.form-inline { 
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    float: right;
+  }
+ 
+ /* Style the input fields */
+  .form-inline input {
+    vertical-align: middle;
+    margin: 5px 10px 5px 0;
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  /* Style the submit button */
+  .form-inline button {
+    padding: 10px 20px;
+    background-color: dodgerblue;
+    border: 1px solid #ddd;
+    color: white;
+  }
+  
+  .form-inline button:hover {
+    background-color: royalblue;
+  }
+  
+  /* Add responsiveness - display the form controls vertically instead of horizontally on screens that are less than 800px wide */
+  @media (max-width: 800px) {
+    .form-inline input {
+      margin: 10px 0;
+    }
+  
+    .form-inline {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  .fltText {
+      display: flex;
+      font-weight: 100;
+      font-family: fantasy;
+      font-size:xx-large;
+      color: whitesmoke;
+      padding:10px;
+  }
+
+  .regitration {
+    display: flex;
+    position: relative;
+    bottom: 0;
+
+  }
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+    width: 100%;
+  }
+}
+
+footer {
+    height: 30px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: red;
+    color:white;
+    float: left;
+
+}

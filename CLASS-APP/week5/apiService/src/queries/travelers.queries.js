@@ -9,17 +9,6 @@ created_date DATETIME DEFAULT CURRENT_TIMESTAMP(), \
 status varchar(10) DEFAULT \'pending\', \
 PRIMARY KEY (id))'; 
 
-exports.CREATE_ADDRESS_TABLE = 'CREATE TABLE IF NOT EXISTS \
-address(id int NOT NULL AUTO_INCREMENT, \
-address1 VARCHAR(59) NOT NULL, \
-address2 VARCHAR(50), \
-city VARCHAR(100) NOT NULL, \
-state VARCHAR(2) NOT NULL, \
-zipcode VARCHAR(9) NOT NULL, \
-created_date DATETIME DEFAULT CURRENT_TIMESTAMP(),  \
-last_updated_date DATETIME DEFAULT CURRENT_TIMESTAMP(), \
-PRIMARY KEY (ID));'; 
-
 exports.ALL_TRAVELERS = 'SELECT * FROM traveler';
 
 exports.SINGLE_TRAVELERS = 'SELECT * FROM traveler where id = ?';

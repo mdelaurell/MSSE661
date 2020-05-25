@@ -11,7 +11,7 @@ exports.getAllTravelers = function(req,res) {
 };
 
 exports.getTravelers = function(req,res) {
-    con.quiery(queries.SINGLE_TRAVELERS, [req.params.taskID], function(err, data){
+    con.quiery(queries.SINGLE_TRAVELERS, [req.params.travelerID], function(err, data){
         if (err) {
             res.send(err);
         }
